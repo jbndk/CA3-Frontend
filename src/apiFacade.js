@@ -1,4 +1,4 @@
-const URL = "http://localhost:8080/jpareststarter";
+const URL = "https://annemaj.dk/devops-starter";
  
 function handleHttpErrors(res) {
  if (!res.ok) {

@@ -1,4 +1,6 @@
-const URL = "https://annemaj.dk/ca3";
+import mainURL from "./settings";
+
+const URL = mainURL;
  
 function handleHttpErrors(res) {
  if (!res.ok) {

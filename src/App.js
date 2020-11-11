@@ -1,3 +1,4 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { useState,useEffect } from "react"
 import facade from "./apiFacade";
 import TwoJokes from './jokes';
@@ -28,11 +29,15 @@ function LogIn({ login }) {
  
   return (
     <div>
-      <h2>Login</h2>
       <form onChange={onChange} >
-        <input placeholder="User Name" id="username" />
-        <input placeholder="Password" id="password" />
-        <button onClick={performLogin}>Login</button>
+        <div class="col-sm-1">
+        <br/>
+        <h2>Login</h2>
+        <input class="form-control" placeholder="User Name" id="username" />
+        <input class="form-control" placeholder="Password" id="password" />
+        <br/>
+        <button class="btn btn-primary" onClick={performLogin}>Login</button>
+        </div>
       </form>
     </div>
   )
@@ -92,7 +97,7 @@ function App() {
    } 
  
   return (
-    <div>
+    <div class="col-sm">
       <Header
           loginMsg={loggedIn ? 'You are logged in' : 'Please log in'}
           isLoggedin={loggedIn}
@@ -124,8 +129,8 @@ function App() {
         </Switch>
 
     </Router>
-    
-          <button onClick={logout}>Logout</button>
+          <br/>
+          <button class="btn btn-primary" onClick={logout}>Logout</button>
         </div>)}
 
     </div>

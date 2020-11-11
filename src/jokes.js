@@ -1,9 +1,10 @@
+import mainURL from "./settings";
 import { useState } from "react";
 
 const TwoJokes = () => {
     const [jokes, setJokes] = useState("");
     const GetJokes = () => {
-        fetch("https://annemaj.dk/ca3/api/jokes/parallel")
+        fetch(mainURL + "/api/jokes/parallel")
             .then((res) => res.json())
             .then((data) => {
                 setJokes(data);
@@ -12,12 +13,17 @@ const TwoJokes = () => {
     return (
         <div>
             <h2>Dad joke:</h2>
-            <p>{jokes.joke1}</p>
-            <p>Link: {jokes.joke1Reference}</p>
+            <ul>
+            <li>{jokes.joke1}</li>
+            <li>Link: {jokes.joke1Reference}</li>
+            </ul>
             <h2>Chuck Norris joke:</h2>
-            <p>{jokes.joke2}</p>
-            <p>Link: {jokes.joke2Reference}</p>
-            <button onClick={() => GetJokes()}>Press for two new jokes</button>
+            <ul>
+            <li>{jokes.joke2}</li>
+            <li>Link: {jokes.joke2Reference}</li>
+            </ul>
+            <br/>
+            <button class="btn btn-primary" onClick={() => GetJokes()}>Press for two new jokes</button>
         </div>
     );
 };

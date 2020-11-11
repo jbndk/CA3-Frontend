@@ -3,7 +3,7 @@ import { useState } from "react";
 const TwoJokes = () => {
     const [jokes, setJokes] = useState("");
     const GetJokes = () => {
-        fetch("https://annemaj.dk/CA3/api/jokes/parallel")
+        fetch("https://annemaj.dk/ca3/api/jokes/parallel")
             .then((res) => res.json())
             .then((data) => {
                 setJokes(data);

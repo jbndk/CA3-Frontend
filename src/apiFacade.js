@@ -1,4 +1,4 @@
-const URL = "https://annemaj.dk/CA3";
+const URL = "https://annemaj.dk/ca3";
  
 function handleHttpErrors(res) {
  if (!res.ok) {
@@ -28,9 +28,13 @@ return fetch(URL + "/api/login", options)
   .then(handleHttpErrors)
   .then(res => {setToken(res.token) }) }
 
-const fetchData = () => {   
+const fetchUserData = () => {   
 const options = makeOptions("GET",true); //True add's the token
 return fetch(URL + "/api/info/user", options).then(handleHttpErrors); }
+
+const fetchAdminData = () => {   
+  const options = makeOptions("GET",true); //True add's the token
+  return fetch(URL + "/api/info/admin", options).then(handleHttpErrors); }
 
 const makeOptions= (method,addToken,body) =>{
    var opts = {
@@ -55,7 +59,8 @@ const makeOptions= (method,addToken,body) =>{
      loggedIn,
      login,
      logout,
-     fetchData
+     fetchUserData,
+     fetchAdminData
  }
 }
 const facade = apiFacade();

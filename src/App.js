@@ -21,6 +21,7 @@ function LogIn({ login }) {
     evt.preventDefault();
     login(loginCredentials.username, loginCredentials.password);
   }
+
   const onChange = (evt) => {
     setLoginCredentials({ ...loginCredentials,[evt.target.id]: evt.target.value })
   }
@@ -35,13 +36,16 @@ function LogIn({ login }) {
       </form>
     </div>
   )
- 
 }
+
 function LoggedIn() {
   const [dataFromServer, setDataFromServer] = useState("Loading...")
   
   useEffect(() => {
-    facade.fetchData().then(data=> setDataFromServer(data.msg)); }, [])
+    facade.fetchUserData().then(data=> setDataFromServer(data.msg)); }, [])
+
+    useEffect(() => {
+      facade.fetchAdminData().then(data=> setDataFromServer(data.msg)); }, [])
  
   return (
     <div>
@@ -49,6 +53,20 @@ function LoggedIn() {
     </div>
   )
  
+}
+
+function Header({ isLoggedin, loginMsg }) {
+  return (
+    <ul className="header">
+      <li><NavLink exact activeClassName="active" to="/">Home</NavLink></li>
+      {isLoggedin && (
+        <React.Fragment>
+          <li><NavLink activeClassName="selected" to="/jokes">Jokes</NavLink></li>
+        </React.Fragment>
+      )}
+      <li><NavLink activeClassName="active" to="/login-out"> {loginMsg} </NavLink></li>
+    </ul>
+  );
 }
  
 function App() {
@@ -86,11 +104,8 @@ function App() {
           <LoggedIn />
           
           <Router>
-      <div>
 
-
-
-        <p></p>
+        <br/>
 
         <Switch>
 
@@ -107,7 +122,6 @@ function App() {
           </Route>
 
         </Switch>
-      </div>
 
     </Router>
     
@@ -116,20 +130,6 @@ function App() {
 
     </div>
   )
-}
-
-function Header({ isLoggedin, loginMsg }) {
-  return (
-    <ul className="header">
-      <li><NavLink exact activeClassName="active" to="/">Home</NavLink></li>
-      {isLoggedin && (
-        <React.Fragment>
-          <li><NavLink activeClassName="selected" to="/jokes">Jokes</NavLink></li>
-        </React.Fragment>
-      )}
-      <li><NavLink activeClassName="active" to="/login-out"> {loginMsg} </NavLink></li>
-    </ul>
-  );
 }
 
 function Home() {

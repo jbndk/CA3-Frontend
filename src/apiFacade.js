@@ -1,4 +1,4 @@
-const URL = "https://annemaj.dk/devops-starter";
+const URL = "https://annemaj.dk/CA3";
  
 function handleHttpErrors(res) {
  if (!res.ok) {

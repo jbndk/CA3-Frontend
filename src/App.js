@@ -1,5 +1,17 @@
 import React, { useState,useEffect } from "react"
 import facade from "./apiFacade";
+import TwoJokes from './jokes';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  NavLink,
+  useParams,
+  useRouteMatch,
+  Prompt,
+  Link,
+  useHistory
+} from "react-router-dom";
  
 function LogIn({ login }) {
   const init = { username: "", password: "" };
@@ -28,12 +40,12 @@ function LogIn({ login }) {
 function LoggedIn() {
   const [dataFromServer, setDataFromServer] = useState("Loading...")
   
-  useEffect(() => {facade.fetchData().then(data=> setDataFromServer(data.msg)); }, [])
+  useEffect(() => {
+    facade.fetchData().then(data=> setDataFromServer(data.msg)); }, [])
  
   return (
     <div>
-      <h2>Data Received from server</h2>
-      <h3>{dataFromServer}</h3>
+      <h2>Your are logged in as: {dataFromServer}</h2>
     </div>
   )
  
@@ -63,13 +75,88 @@ function App() {
  
   return (
     <div>
+      <Header
+          loginMsg={loggedIn ? 'You are logged in' : 'Please log in'}
+          isLoggedin={loggedIn}
+        />
+
       {!loggedIn ? (<LogIn login={login} />) :
-        (<div>
+        (
+        <div>
           <LoggedIn />
+          
+          <Router>
+      <div>
+
+
+
+        <p></p>
+
+        <Switch>
+
+          <Route exact path="/">
+            <Home />
+          </Route>
+
+          <Route path="/jokes">
+            <Jokes />
+          </Route>
+
+          <Route>
+            <NoMatch />
+          </Route>
+
+        </Switch>
+      </div>
+
+    </Router>
+    
           <button onClick={logout}>Logout</button>
         </div>)}
+
     </div>
   )
- 
 }
+
+function Header({ isLoggedin, loginMsg }) {
+  return (
+    <ul className="header">
+      <li><NavLink exact activeClassName="active" to="/">Home</NavLink></li>
+      {isLoggedin && (
+        <React.Fragment>
+          <li><NavLink activeClassName="selected" to="/jokes">Jokes</NavLink></li>
+        </React.Fragment>
+      )}
+      <li><NavLink activeClassName="active" to="/login-out"> {loginMsg} </NavLink></li>
+    </ul>
+  );
+}
+
+function Home() {
+  return (
+    <div>
+      <h2>Home</h2>
+    </div>
+  );
+}
+
+function Jokes() {
+  return (
+    <div>
+      <h2>Two jokes</h2>
+      <TwoJokes />
+    </div>
+  );
+}
+
+const NoMatch = () => {
+  return (
+    <div>
+      <h3>
+        No match found for this.
+      </h3>
+    </div>
+  );
+};
+
 export default App;

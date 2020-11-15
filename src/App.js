@@ -206,6 +206,9 @@ const ReadMe = () => {
           <li>Download the project <a href="https://github.com/jbndk/CA3-Frontend">here</a></li>
           <li>Delete the .git file from the project</li>
           <li>Open the folder in Git Bash or a similar program</li>
+          <li>Run <i>npm install</i></li>
+          <li>Run <i>npm bootstrap</i></li>
+          <li>Run <i>npm install react-router-dom</i></li>
           <li>Run <i>npm start</i> to open the project in a browser with hot reload</li>
           <li>Run <i>code .</i> to open the project in Visual Studio Code</li>
           <li>Remember to change the URL in settings.js to point on your own REST endpoint</li>
